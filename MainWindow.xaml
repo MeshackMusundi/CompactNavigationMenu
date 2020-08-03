@@ -1,0 +1,51 @@
+﻿<Window x:Class="CompactNavigationMenu.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CompactNavigationMenu"
+        xmlns:views="clr-namespace:CompactNavigationMenu.Views"
+        mc:Ignorable="d"
+        Height="450" Width="700" Background="#FFEAEBEC"
+        Title="Nav" WindowStartupLocation="CenterScreen">
+
+    <Window.Resources>
+        <DataTemplate x:Key="HomeViewTemplate">
+            <views:HomeView/>
+        </DataTemplate>
+        <DataTemplate x:Key="EmailViewTemplate">
+            <views:EmailView/>
+        </DataTemplate>
+        <DataTemplate x:Key="CloudViewTemplate">
+            <views:CloudView/>
+        </DataTemplate>
+
+        <Style x:Key="NavigationContentStyle" TargetType="ContentControl">
+            <Setter Property="ContentTemplate" Value="{StaticResource HomeViewTemplate}"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding ElementName=NavigationMenuListBox, Path=SelectedItem}"
+                             Value="Email">
+                    <Setter Property="ContentTemplate" Value="{StaticResource EmailViewTemplate}"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding ElementName=NavigationMenuListBox, Path=SelectedItem}" 
+                             Value="Cloud">
+                    <Setter Property="ContentTemplate" Value="{StaticResource CloudViewTemplate}"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <ListBox x:Name="NavigationMenuListBox" 
+                 Style="{StaticResource NavigationListBoxStyle}"
+                 ItemTemplate="{DynamicResource NavigationDataTemplate}"
+                 ItemContainerStyle="{DynamicResource NavigationListBoxItemStyle}"/>
+
+        <ContentControl Grid.Column="1" Style="{StaticResource NavigationContentStyle}"/>
+    </Grid>
+</Window>
