@@ -10,10 +10,6 @@ namespace CompactNavigationMenu
         public MainWindow()
         {
             InitializeComponent();
-
-            NavigationMenuListBox.Items.Add("Home");
-            NavigationMenuListBox.Items.Add("Email");
-            NavigationMenuListBox.Items.Add("Cloud");
         }
     }
 }

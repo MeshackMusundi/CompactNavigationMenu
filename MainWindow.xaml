@@ -10,16 +10,6 @@
         Title="Nav" WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
-        <DataTemplate x:Key="HomeViewTemplate">
-            <views:HomeView/>
-        </DataTemplate>
-        <DataTemplate x:Key="EmailViewTemplate">
-            <views:EmailView/>
-        </DataTemplate>
-        <DataTemplate x:Key="CloudViewTemplate">
-            <views:CloudView/>
-        </DataTemplate>
-
         <Style x:Key="NavigationContentStyle" TargetType="ContentControl">
             <Setter Property="ContentTemplate" Value="{StaticResource HomeViewTemplate}"/>
             <Style.Triggers>
@@ -43,8 +33,9 @@
 
         <ListBox x:Name="NavigationMenuListBox" 
                  Style="{StaticResource NavigationListBoxStyle}"
+                 ItemContainerStyle="{DynamicResource NavigationListBoxItemStyle}"
                  ItemTemplate="{DynamicResource NavigationDataTemplate}"
-                 ItemContainerStyle="{DynamicResource NavigationListBoxItemStyle}"/>
+                 ItemsSource="{StaticResource NavigationMenuItems}"/>
 
         <ContentControl Grid.Column="1" Style="{StaticResource NavigationContentStyle}"/>
     </Grid>
